@@ -4,6 +4,7 @@ const indexController = require("./controllers/index-controller");
 const loginController = require("./controllers/login-controller");
 const logoutController = require("./controllers/logout-controller");
 const dashboardIndexController = require("./controllers/dashboard/index-controller");
+const dashboardUsersIndexController = require("./controllers/dashboard/users/index-controller");
 const apiSeedController = require("./controllers/api/seed-controller");
 
 const router = express.Router();
@@ -17,6 +18,12 @@ router.get(
   "/dashboard",
   authMiddleware.required,
   dashboardIndexController.index
+);
+
+router.get(
+  "/dashboard/users",
+  authMiddleware.required,
+  dashboardUsersIndexController.index
 );
 
 // api
