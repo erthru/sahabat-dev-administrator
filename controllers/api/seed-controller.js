@@ -26,16 +26,28 @@ async function seed(req, res) {
       prisma.usedTag.deleteMany({}),
     ]);
 
-    const password = await bcrypt.hash("admin", 10);
+    const encryptedPassword = await bcrypt.hash("123456", 10);
 
-    await prisma.user.create({
-      data: {
-        username: "admin",
-        password: password,
-        role: "ADMIN",
-        fullname: "Sahabat Dev Admin",
-      },
-    });
+    await Promise.all([
+      prisma.user.create({
+        data: {
+          username: "admin",
+          password: encryptedPassword,
+          role: "ADMIN",
+          fullname: "Sahabat Dev Admin",
+          email: "admin@sahabatdev.com",
+        },
+      }),
+      prisma.user.create({
+        data: {
+          username: "erthru",
+          password: encryptedPassword,
+          role: "USER",
+          fullname: "Suprianto Djmlu",
+          email: "ersaka96@gmail.com",
+        },
+      }),
+    ]);
 
     res.status(201).json({
       error: 0,

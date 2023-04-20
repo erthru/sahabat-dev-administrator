@@ -5,25 +5,60 @@ const loginController = require("./controllers/login-controller");
 const logoutController = require("./controllers/logout-controller");
 const dashboardIndexController = require("./controllers/dashboard/index-controller");
 const dashboardUsersIndexController = require("./controllers/dashboard/users/index-controller");
+const dashboardUsersAddController = require("./controllers/dashboard/users/add-controller");
+const dashboardUsersDetailController = require("./controllers/dashboard/users/detail-controller");
+const dashboardPostsIndexController = require("./controllers/dashboard/posts/index-controller");
 const apiSeedController = require("./controllers/api/seed-controller");
 
 const router = express.Router();
 
-router.get("/", indexController.index);
-router.get("/login", authMiddleware.guest, loginController.login);
-router.post("/login", authMiddleware.guest, loginController.attemp);
-router.get("/logout", logoutController.logout);
+router.get("/", indexController.get);
+router.get("/login", authMiddleware.guest, loginController.get);
+router.post("/login", authMiddleware.guest, loginController.post);
+router.get("/logout", logoutController.get);
 
-router.get(
-  "/dashboard",
-  authMiddleware.required,
-  dashboardIndexController.index
-);
+router.get("/dashboard", authMiddleware.required, dashboardIndexController.get);
 
 router.get(
   "/dashboard/users",
   authMiddleware.required,
-  dashboardUsersIndexController.index
+  dashboardUsersIndexController.get
+);
+
+router.get(
+  "/dashboard/users/add",
+  authMiddleware.required,
+  dashboardUsersAddController.get
+);
+
+router.post(
+  "/dashboard/users/add",
+  authMiddleware.required,
+  dashboardUsersAddController.post
+);
+
+router.get(
+  "/dashboard/users/:id",
+  authMiddleware.required,
+  dashboardUsersDetailController.get
+);
+
+router.put(
+  "/dashboard/users/:id",
+  authMiddleware.required,
+  dashboardUsersDetailController.put
+);
+
+router.delete(
+  "/dashboard/users/:id",
+  authMiddleware.required,
+  dashboardUsersDetailController.remove
+);
+
+router.get(
+  "/dashboard/posts",
+  authMiddleware.required,
+  dashboardPostsIndexController.get
 );
 
 // api

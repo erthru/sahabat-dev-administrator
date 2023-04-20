@@ -1,11 +1,15 @@
-function index(req, res) {
+function get(req, res) {
   try {
-    res.render("pages/index");
+    if (req.session.user) {
+      res.redirect("/dashboard");
+    } else {
+      res.redirect("/login");
+    }
   } catch (err) {
     res.send(err.message);
   }
 }
 
 module.exports = {
-  index,
+  get,
 };

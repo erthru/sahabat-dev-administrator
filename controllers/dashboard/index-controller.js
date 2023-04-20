@@ -1,4 +1,4 @@
-function index(req, res) {
+function get(req, res) {
   try {
     res.render("pages/dashboard/index", {
       title: `Dashboard | ${process.env.APP_NAME}`,
@@ -10,5 +10,5 @@ function index(req, res) {
 }
 
 module.exports = {
-  index,
+  get,
 };

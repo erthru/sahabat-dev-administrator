@@ -15,7 +15,7 @@
                   <li class="breadcrumb-item">
                     <a href="/dashboard">Dashboard</a>
                   </li>
-                  <li class="breadcrumb-item active">Pengguna</li>
+                  <li class="breadcrumb-item active">Postingan</li>
                 </ol>
               </div>
             </div>
@@ -28,7 +28,7 @@
                 <div class="card">
                   <div class="card-body">
                     <a
-                      href="/dashboard/users/add"
+                      href="/dashboard/posts/add"
                       class="btn btn-primary mb-3 d-table ml-auto ml-md-0 mr-auto mr-md-0 text-white"
                     >
                       <i class="fas fa-plus" style="font-size: 12px"></i>
@@ -38,29 +38,42 @@
                       <thead>
                         <tr>
                           <th>No</th>
-                          <th>Username</th>
-                          <th>Role</th>
-                          <th>Nama Lengkap</th>
-                          <th>Email</th>
+                          <th>Judul</th>
+                          <th>Status</th>
+                          <th>Penulis</th>
+                          <th>Thumbnail</th>
+                          <th>Diperbarui Pada</th>
                           <th>Aksi</th>
                         </tr>
                       </thead>
                       <tbody>
-                        <% users.forEach(function(user, i) { %>
+                        <% posts.forEach(function(post, i) { %>
                         <tr>
                           <td><%= i+1 %></td>
-                          <td><%= user.username %></td>
-                          <td><%= user.role %></td>
-                          <td><%= user.fullname %></td>
-                          <td><%= user.email %></td>
+                          <td><%= post.title %></td>
                           <td>
-                            <% if (user.role === 'ADMIN') { %>
+                            <%= post.status === 'PUBLISHED' ? 'Dipublikasi' :
+                            'Draft' %>
+                          </td>
+                          <td><%= post.user.fullname %></td>
+                          <td>
+                            <img
+                              src="<%= post.thumbnail %>"
+                              alt="thumbnail"
+                              width="100px"
+                              height="100px"
+                              style="object-fit: cover"
+                            />
+                          </td>
+                          <td><%= post.updatedAt %></td>
+                          <td>
+                            <% if (post.user.id !== sessionUser.id) { %>
                             <button class="btn btn-warning" disabled>
                               Lihat
                             </button>
                             <% } else { %>
                             <a
-                              href="/dashboard/users/<%= user.id %>"
+                              href="/dashboard/posts/<%= user.id %>"
                               class="btn btn-warning"
                             >
                               Lihat

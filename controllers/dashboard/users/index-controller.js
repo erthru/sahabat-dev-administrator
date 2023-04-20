@@ -2,8 +2,13 @@ const prismaClient = require("@prisma/client");
 
 const prisma = new prismaClient.PrismaClient();
 
-async function index(req, res) {
+async function get(req, res) {
   try {
+    if (req.session.user.role !== "ADMIN") {
+      res.send("not allowed");
+      return;
+    }
+
     await prisma.$connect();
 
     const users = await prisma.user.findMany({
@@ -15,7 +20,7 @@ async function index(req, res) {
     res.render("pages/dashboard/users/index", {
       title: `Pengguna | ${process.env.APP_NAME}`,
       navbarTitle: "Pangguna",
-      users
+      users,
     });
   } catch (err) {
     res.send(err.message);
@@ -23,5 +28,5 @@ async function index(req, res) {
 }
 
 module.exports = {
-  index,
+  get,
 };

@@ -12,3 +12,35 @@
 <script src="/assets/admin-lte/plugins/datatables-buttons/js/buttons.colVis.min.js"></script>
 <script src="/assets/admin-lte/plugins/overlayScrollbars/js/jquery.overlayScrollbars.min.js"></script>
 <script src="/assets/admin-lte/dist/js/adminlte.min.js"></script>
+<script>
+  const toastSuccess = "<%= toastSuccess %>";
+  const toastWarning = "<%= toastWarning %>";
+  const toastError = "<%= toastError %>";
+
+  if (toastSuccess) {
+    $(document).Toasts("create", {
+      title: "Berhasil",
+      body: toastSuccess,
+      autohide: true,
+      class: "bg-success",
+    });
+  }
+
+  if (toastWarning) {
+    $(document).Toasts("create", {
+      title: "Warning",
+      body: toastWarning,
+      autohide: true,
+      class: "bg-warning",
+    });
+  }
+
+  if (toastError) {
+    $(document).Toasts("create", {
+      title: "Error",
+      body: toastError,
+      autohide: true,
+      class: "bg-danger",
+    });
+  }
+</script>

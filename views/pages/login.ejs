@@ -1,12 +1,12 @@
 <!DOCTYPE html>
 <html lang="en">
   <head>
-    <%- include("../partials/dashboard-head") %>
+    <%- include("../partials/head") %>
   </head>
   <body class="hold-transition login-page">
     <div class="login-box">
       <div class="login-logo">
-        <a href="../../index2.html"><b>Sahabat</b>Dev</a>
+        <p>put logo here</p>
       </div>
       <div class="card">
         <div class="card-body login-card-body">
@@ -48,18 +48,6 @@
         </div>
       </div>
     </div>
-    <%- include("../partials/dashboard-foot") %>
-    <script>
-      const errorFlashMessage = "<%= errorFlashMessage %>";
-
-      if (errorFlashMessage === "login failed") {
-        $(document).Toasts("create", {
-          title: "Error",
-          body: "Login gagal, username atau password salah.",
-          autohide: true,
-          class: "bg-danger",
-        });
-      }
-    </script>
+    <%- include("../partials/foot") %>
   </body>
 </html>

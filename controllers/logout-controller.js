@@ -1,15 +1,6 @@
-async function logout(req, res) {
+async function get(req, res) {
   try {
-    await new Promise(function (resolve, reject) {
-      req.session.destroy(function (err) {
-        if (err) {
-          reject(err);
-        } else {
-          resolve();
-        }
-      });
-    });
-
+    req.session = null;
     res.redirect("/");
   } catch (err) {
     res.send(err.message);
@@ -17,5 +8,5 @@ async function logout(req, res) {
 }
 
 module.exports = {
-  logout,
+  get,
 };
