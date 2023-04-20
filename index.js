@@ -6,6 +6,7 @@ const localMiddleware = require("./middlewares/local");
 const cookieSession = require("cookie-session");
 const methodOverride = require("method-override");
 const cors = require("cors");
+const expressEjsLayouts = require("express-ejs-layouts");
 
 dotEnv.config();
 const app = express();
@@ -25,8 +26,10 @@ app.use(
 app.use(flash());
 app.use(localMiddleware);
 app.use(methodOverride("overrideMethod"));
-app.use(router);
 app.set("view engine", "ejs");
+app.use(expressEjsLayouts);
+app.set("layout extractScripts", true);
+app.use(router);
 
 app.listen(Number(process.env.PORT), function () {
   console.log(`server run on port: ${process.env.PORT}`);

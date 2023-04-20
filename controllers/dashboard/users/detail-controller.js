@@ -20,6 +20,7 @@ async function get(req, res) {
     });
 
     res.render("pages/dashboard/users/detail", {
+      layout: "layouts/layout-dashboard",
       title: `Detail Pengguna | ${process.env.APP_NAME}`,
       navbarTitle: "Detail Pangguna",
       user,

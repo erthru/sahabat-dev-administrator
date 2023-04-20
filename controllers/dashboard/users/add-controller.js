@@ -11,6 +11,7 @@ async function get(req, res) {
     }
 
     res.render("pages/dashboard/users/add", {
+      layout: "layouts/layout-dashboard",
       title: `Tambah Pengguna | ${process.env.APP_NAME}`,
       navbarTitle: "Tambah Pangguna",
     });

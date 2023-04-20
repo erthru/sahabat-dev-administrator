@@ -18,6 +18,7 @@ async function get(req, res) {
     });
 
     res.render("pages/dashboard/users/index", {
+      layout: "layouts/layout-dashboard",
       title: `Pengguna | ${process.env.APP_NAME}`,
       navbarTitle: "Pangguna",
       users,

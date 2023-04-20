@@ -8,6 +8,7 @@ async function get(req, res) {
     const posts = await prisma.post.findMany();
 
     res.render("pages/dashboard/posts/index", {
+      layout: "layouts/layout-dashboard",
       title: `Postingan | ${process.env.APP_NAME}`,
       navbarTitle: "Postingan",
       posts,

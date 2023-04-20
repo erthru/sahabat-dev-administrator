@@ -6,6 +6,7 @@ const prisma = new prismaClient.PrismaClient();
 function get(req, res) {
   try {
     res.render("pages/login", {
+      layout: "layouts/layout-default",
       title: `Login | ${process.env.APP_NAME}`,
     });
   } catch (err) {

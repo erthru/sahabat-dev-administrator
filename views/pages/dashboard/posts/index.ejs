@@ -1,105 +1,91 @@
-<!DOCTYPE html>
-<html lang="en">
-  <%- include("../../../partials/head") %>
-  <body class="hold-transition sidebar-mini layout-fixed">
-    <div class="wrapper">
-      <%- include("../../../partials/navbar") %> <%-
-      include("../../../partials/sidebar") %>
-      <div class="content-wrapper">
-        <div class="content-header">
-          <div class="container-fluid">
-            <div class="row mb-2">
-              <div class="col">
-                <ol class="breadcrumb">
-                  <li class="breadcrumb-item"><a href="/">Home</a></li>
-                  <li class="breadcrumb-item">
-                    <a href="/dashboard">Dashboard</a>
-                  </li>
-                  <li class="breadcrumb-item active">Postingan</li>
-                </ol>
-              </div>
+<div class="content-wrapper">
+  <div class="content-header">
+    <div class="container-fluid">
+      <div class="row mb-2">
+        <div class="col">
+          <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="/">Home</a></li>
+            <li class="breadcrumb-item">
+              <a href="/dashboard">Dashboard</a>
+            </li>
+            <li class="breadcrumb-item active">Postingan</li>
+          </ol>
+        </div>
+      </div>
+    </div>
+  </div>
+  <section class="content">
+    <div class="container-fluid">
+      <div class="row">
+        <div class="col-12">
+          <div class="card">
+            <div class="card-body">
+              <a
+                href="/dashboard/posts/add"
+                class="btn btn-primary mb-3 d-table ml-auto ml-md-0 mr-auto mr-md-0 text-white"
+              >
+                <i class="fas fa-plus" style="font-size: 12px"></i>
+                <span class="ml-1">Tambah</span>
+              </a>
+              <table class="table table-bordered table-hover">
+                <thead>
+                  <tr>
+                    <th>No</th>
+                    <th>Judul</th>
+                    <th>Status</th>
+                    <th>Penulis</th>
+                    <th>Thumbnail</th>
+                    <th>Diperbarui Pada</th>
+                    <th>Aksi</th>
+                  </tr>
+                </thead>
+                <tbody>
+                  <% posts.forEach(function(post, i) { %>
+                  <tr>
+                    <td><%= i+1 %></td>
+                    <td><%= post.title %></td>
+                    <td>
+                      <%= post.status === 'PUBLISHED' ? 'Dipublikasi' : 'Draft'
+                      %>
+                    </td>
+                    <td><%= post.user.fullname %></td>
+                    <td>
+                      <img
+                        src="<%= post.thumbnail %>"
+                        alt="thumbnail"
+                        width="100px"
+                        height="100px"
+                        style="object-fit: cover"
+                      />
+                    </td>
+                    <td><%= post.updatedAt %></td>
+                    <td>
+                      <% if (post.user.id !== sessionUser.id) { %>
+                      <button class="btn btn-warning" disabled>Lihat</button>
+                      <% } else { %>
+                      <a
+                        href="/dashboard/posts/<%= user.id %>"
+                        class="btn btn-warning"
+                      >
+                        Lihat
+                      </a>
+                      <% } %>
+                    </td>
+                  </tr>
+                  <%}) %>
+                </tbody>
+              </table>
             </div>
           </div>
         </div>
-        <section class="content">
-          <div class="container-fluid">
-            <div class="row">
-              <div class="col-12">
-                <div class="card">
-                  <div class="card-body">
-                    <a
-                      href="/dashboard/posts/add"
-                      class="btn btn-primary mb-3 d-table ml-auto ml-md-0 mr-auto mr-md-0 text-white"
-                    >
-                      <i class="fas fa-plus" style="font-size: 12px"></i>
-                      <span class="ml-1">Tambah</span>
-                    </a>
-                    <table class="table table-bordered table-hover">
-                      <thead>
-                        <tr>
-                          <th>No</th>
-                          <th>Judul</th>
-                          <th>Status</th>
-                          <th>Penulis</th>
-                          <th>Thumbnail</th>
-                          <th>Diperbarui Pada</th>
-                          <th>Aksi</th>
-                        </tr>
-                      </thead>
-                      <tbody>
-                        <% posts.forEach(function(post, i) { %>
-                        <tr>
-                          <td><%= i+1 %></td>
-                          <td><%= post.title %></td>
-                          <td>
-                            <%= post.status === 'PUBLISHED' ? 'Dipublikasi' :
-                            'Draft' %>
-                          </td>
-                          <td><%= post.user.fullname %></td>
-                          <td>
-                            <img
-                              src="<%= post.thumbnail %>"
-                              alt="thumbnail"
-                              width="100px"
-                              height="100px"
-                              style="object-fit: cover"
-                            />
-                          </td>
-                          <td><%= post.updatedAt %></td>
-                          <td>
-                            <% if (post.user.id !== sessionUser.id) { %>
-                            <button class="btn btn-warning" disabled>
-                              Lihat
-                            </button>
-                            <% } else { %>
-                            <a
-                              href="/dashboard/posts/<%= user.id %>"
-                              class="btn btn-warning"
-                            >
-                              Lihat
-                            </a>
-                            <% } %>
-                          </td>
-                        </tr>
-                        <%}) %>
-                      </tbody>
-                    </table>
-                  </div>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
       </div>
-      <%- include("../../../partials/footer") %>
     </div>
-    <%- include("../../../partials/foot") %>
-    <script>
-      $("document").ready(function () {
-        $("table").DataTable({
-          responsive: true,
-        });
-      });
-    </script>
-  </body>
-</html>
+  </section>
+</div>
+<script>
+  $("document").ready(function () {
+    $("table").DataTable({
+      responsive: true,
+    });
+  });
+</script>
