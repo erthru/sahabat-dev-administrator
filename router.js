@@ -11,8 +11,9 @@ const dashboardUsersDetailController = require("./controllers/dashboard/users/de
 const dashboardPostsIndexController = require("./controllers/dashboard/posts/index-controller");
 const dashboardPostsAddController = require("./controllers/dashboard/posts/add-controller");
 const dashboardPostsDetailController = require("./controllers/dashboard/posts/detail-controller");
-const dashboardCategoryIndexController = require("./controllers/dashboard/categories/index-controller");
-const dashboardCategoryAddController = require("./controllers/dashboard/categories/add-controller");
+const dashboardCategoriesIndexController = require("./controllers/dashboard/categories/index-controller");
+const dashboardCategoriesAddController = require("./controllers/dashboard/categories/add-controller");
+const dashboardCategoriesDetailController = require("./controllers/dashboard/categories/detail-controller");
 const apiSeedController = require("./controllers/api/seed-controller");
 const apiSessionOnlyController = require("./controllers/api/session-only-controller");
 
@@ -100,19 +101,37 @@ router.delete(
 router.get(
   "/dashboard/categories",
   authMiddleware.required,
-  dashboardCategoryIndexController.get
+  dashboardCategoriesIndexController.get
 );
 
 router.get(
   "/dashboard/categories/add",
   authMiddleware.required,
-  dashboardCategoryAddController.get
+  dashboardCategoriesAddController.get
 );
 
 router.post(
   "/dashboard/categories/add",
   authMiddleware.required,
-  dashboardCategoryAddController.post
+  dashboardCategoriesAddController.post
+);
+
+router.get(
+  "/dashboard/categories/:id",
+  authMiddleware.required,
+  dashboardCategoriesDetailController.get
+);
+
+router.put(
+  "/dashboard/categories/:id",
+  authMiddleware.required,
+  dashboardCategoriesDetailController.put
+);
+
+router.delete(
+  "/dashboard/categories/:id",
+  authMiddleware.required,
+  dashboardCategoriesDetailController.remove
 );
 
 // api
