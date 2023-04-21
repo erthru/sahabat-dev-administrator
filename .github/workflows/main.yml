@@ -1,0 +1,23 @@
+name: CI
+
+on:
+  push:
+    branches: [main]
+  workflow_dispatch:
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: install dependencies
+        run: npm ci
+      - name: run migration
+        run: npx migrate dev
+
+  run:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: deploy
+        run: pm2 start npm --name "sahabat-dev-administrator" -- start
