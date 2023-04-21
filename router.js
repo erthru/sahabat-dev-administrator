@@ -14,6 +14,7 @@ const dashboardPostsDetailController = require("./controllers/dashboard/posts/de
 const dashboardCategoriesIndexController = require("./controllers/dashboard/categories/index-controller");
 const dashboardCategoriesAddController = require("./controllers/dashboard/categories/add-controller");
 const dashboardCategoriesDetailController = require("./controllers/dashboard/categories/detail-controller");
+const dashboardProfileController = require("./controllers/dashboard/profile-controller");
 const apiSeedController = require("./controllers/api/seed-controller");
 const apiSessionOnlyController = require("./controllers/api/session-only-controller");
 
@@ -132,6 +133,18 @@ router.delete(
   "/dashboard/categories/:id",
   authMiddleware.required,
   dashboardCategoriesDetailController.remove
+);
+
+router.get(
+  "/dashboard/profile",
+  authMiddleware.required,
+  dashboardProfileController.get
+);
+
+router.put(
+  "/dashboard/profile",
+  authMiddleware.required,
+  dashboardProfileController.put
 );
 
 // api

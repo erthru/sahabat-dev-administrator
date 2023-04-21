@@ -38,11 +38,10 @@ async function put(req, res) {
     }
 
     const { id } = req.params;
-    const { username, fullname, email } = req.body;
+    const { fullname, email } = req.body;
 
     await prisma.user.update({
       data: {
-        username,
         fullname,
         email,
       },
