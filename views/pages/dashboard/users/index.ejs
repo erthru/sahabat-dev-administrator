@@ -19,10 +19,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <a
-                href="/dashboard/users/add"
-                class="btn btn-primary mb-3 d-table ml-auto ml-md-0 mr-auto mr-md-0 text-white"
-              >
+              <a href="/dashboard/users/add" class="btn btn-primary mb-3 d-table ml-auto ml-md-0 mr-auto mr-md-0 text-white">
                 <i class="fas fa-plus" style="font-size: 12px"></i>
                 <span class="ml-1">Tambah</span>
               </a>
@@ -40,19 +37,26 @@
                 <tbody>
                   <% users.forEach(function(user, i) { %>
                   <tr>
-                    <td><%= i+1 %></td>
-                    <td><%= user.username %></td>
-                    <td><%= user.role %></td>
-                    <td><%= user.fullname %></td>
-                    <td><%= user.email %></td>
                     <td>
-                      <% if (user.role === 'ADMIN') { %>
+                      <%= i+1 %>
+                    </td>
+                    <td>
+                      <%= user.username %>
+                    </td>
+                    <td>
+                      <%= user.role %>
+                    </td>
+                    <td>
+                      <%= user.fullname %>
+                    </td>
+                    <td>
+                      <%= user.email %>
+                    </td>
+                    <td>
+                      <% if (user.role==='ADMIN' ) { %>
                       <button class="btn btn-warning" disabled>Lihat</button>
                       <% } else { %>
-                      <a
-                        href="/dashboard/users/<%= user.id %>"
-                        class="btn btn-warning"
-                      >
+                      <a href="/dashboard/users/<%= user.id %>" class="btn btn-warning">
                         Lihat
                       </a>
                       <% } %>
@@ -69,7 +73,7 @@
   </section>
 </div>
 <script>
-  $("document").ready(function () {
+  $("document").ready(function() {
     $("table").DataTable({
       responsive: true,
     });

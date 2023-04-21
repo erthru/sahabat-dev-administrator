@@ -22,58 +22,29 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <form
-                action="/dashboard/users/<%= user.id %>?overrideMethod=put"
-                method="post"
-              >
+              <form action="/dashboard/users/<%= user.id %>?overrideMethod=put" method="post">
                 <div class="row">
                   <div class="col-12 col-md-4">
                     <div class="form-group">
                       <label>Username</label>
-                      <input
-                        value="<%= user.username %>"
-                        type="text"
-                        name="username"
-                        class="form-control"
-                        placeholder="Masukkan Username"
-                        required
-                      />
+                      <input value="<%= user.username %>" type="text" name="username" class="form-control" placeholder="Masukkan Username" required />
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
                     <div class="form-group">
                       <label>Nama Lengkap</label>
-                      <input
-                        value="<%= user.fullname %>"
-                        type="text"
-                        name="fullname"
-                        class="form-control"
-                        placeholder="Masukkan Nama Lengkap"
-                        required
-                      />
+                      <input value="<%= user.fullname %>" type="text" name="fullname" class="form-control" placeholder="Masukkan Nama Lengkap" required />
                     </div>
                   </div>
                   <div class="col-12 col-md-4">
                     <div class="form-group">
                       <label>Email</label>
-                      <input
-                        value="<%= user.email %>"
-                        type="email"
-                        name="email"
-                        class="form-control"
-                        placeholder="Masukkan Email"
-                        required
-                      />
+                      <input value="<%= user.email %>" type="email" name="email" class="form-control" placeholder="Masukkan Email" required />
                     </div>
                   </div>
                 </div>
                 <button type="submit" class="btn btn-primary">Simpan</button>
-                <button
-                  type="button"
-                  class="btn btn-danger"
-                  data-toggle="modal"
-                  data-target="#deleteModal"
-                >
+                <button type="button" class="btn btn-danger" data-toggle="modal" data-target="#deleteModal">
                   Hapus
                 </button>
               </form>

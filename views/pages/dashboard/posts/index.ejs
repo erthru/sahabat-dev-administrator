@@ -19,10 +19,7 @@
         <div class="col-12">
           <div class="card">
             <div class="card-body">
-              <a
-                href="/dashboard/posts/add"
-                class="btn btn-primary mb-3 d-table ml-auto ml-md-0 mr-auto mr-md-0 text-white"
-              >
+              <a href="/dashboard/posts/add" class="btn btn-primary mb-3 d-table ml-auto ml-md-0 mr-auto mr-md-0 text-white">
                 <i class="fas fa-plus" style="font-size: 12px"></i>
                 <span class="ml-1">Tambah</span>
               </a>
@@ -41,34 +38,30 @@
                 <tbody>
                   <% posts.forEach(function(post, i) { %>
                   <tr>
-                    <td><%= i+1 %></td>
-                    <td><%= post.title %></td>
-                    <td><%= post.category.name %></td>
                     <td>
-                      <%= post.status === 'PUBLISHED' ? 'Dipublikasi' : 'Draft'
-                      %>
-                    </td>
-                    <td><%= post.user.fullname %></td>
-                    <td>
-                      <img
-                        src="<%= post.thumbnail %>"
-                        alt="thumbnail"
-                        width="80px"
-                        height="80px"
-                        style="object-fit: cover"
-                      />
+                      <%= i+1 %>
                     </td>
                     <td>
-                      <% if (post.user.id !== sessionUser.id) { %>
-                      <button class="btn btn-warning" disabled>Lihat</button>
-                      <% } else { %>
-                      <a
-                        href="/dashboard/posts/<%= post.id %>"
-                        class="btn btn-warning"
-                      >
+                      <%= post.title %>
+                    </td>
+                    <td>
+                      <%= post.category.name %>
+                    </td>
+                    <td>
+                      <%= post.status==='PUBLISHED' ? 'Dipublikasi' : 'Draft' %>
+                    </td>
+                    <td>
+                      <%= post.user.fullname %>
+                    </td>
+                    <td>
+                      <% if (post.thumbnail) { %>
+                      <img src="<%= post.thumbnail %>" alt="thumbnail" width="80px" height="80px" style="object-fit: cover" />
+                      <% }else { %> Tidak ada thumbnail <% } %>
+                    </td>
+                    <td>
+                      <a href="/dashboard/posts/<%= post.id %>" class="btn btn-warning">
                         Lihat
                       </a>
-                      <% } %>
                     </td>
                   </tr>
                   <%}) %>
@@ -82,7 +75,7 @@
   </section>
 </div>
 <script>
-  $("document").ready(function () {
+  $("document").ready(function() {
     $("table").DataTable({
       responsive: true,
     });

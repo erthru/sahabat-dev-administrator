@@ -10,7 +10,7 @@
             <li class="breadcrumb-item">
               <a href="/dashboard/posts">Postingan</a>
             </li>
-            <li class="breadcrumb-item active">Tambah</li>
+            <li class="breadcrumb-item active">Detail</li>
           </ol>
         </div>
       </div>
@@ -18,26 +18,23 @@
   </div>
   <section class="content">
     <div class="container-fluid">
-      <% if (categories.length === 0) { %>
-      <div class="alert alert-danger">
-        Anda belum memiliki kategori, silahkan tambah kategori terlebih dahulu
-        <a href="/dashboard/categories">di sini</a>
-      </div>
-      <% } %>
-      <form action="/dashboard/posts/add" method="post">
+      <form action="/dashboard/posts/<%= post.id %>?overrideMethod=put" method="post">
         <div class="row">
           <div class="col-12 col-md-8">
             <div class="card">
               <div class="card-body">
                 <div class="form-group">
                   <label>Judul</label>
-                  <input type="text" name="title" class="form-control" placeholder="Masukkan Judul" required />
+                  <input value="<%= post.title %>" type="text" name="title" class="form-control" placeholder="Masukkan Judul" required />
                 </div>
                 <div class="form-group">
                   <label>Isi</label>
-                  <textarea id="body" name="body" class="form-control" required></textarea>
+                  <textarea id="body" name="body" class="form-control" required>
+                    <%= post.body %>
+                  </textarea>
                 </div>
-                <button class="btn btn-primary">Simpan</button>
+                <button type="submit" class="btn btn-primary">Simpan</button>
+                <button type="button" class="btn btn-danger">Hapus</button>
               </div>
             </div>
           </div>
@@ -50,13 +47,13 @@
                 </div>
                 <img id="thumbnailPreview" alt="thumbnail" width="100%" height="200px" style="object-fit: cover" />
                 <button id="thumbnailRemover" type="button" class="btn btn-link text-danger" style="margin-left: -16px;" onclick="deleteThumbnail()">Hapus Thumbnail</button>
-                <input id="thumbnail" type="hidden" name="thumbnail" />
+                <input id="thumbnail" value="<%= post.thumbnail %>" type="hidden" name="thumbnail" />
                 <div class="form-group">
                   <label>Kategori</label>
                   <select name="categoryId" class="form-control" required>
                     <option value="" disabled selected>Pilih Kategori</option>
                     <% categories.forEach(function (category) { %>
-                    <option value="<%= category.id %>">
+                    <option value="<%= category.id %>" <% if (post.category.id === category.id) { %> selected <% } %>>
                       <%= category.name %>
                     </option>
                     <% }) %>
@@ -64,15 +61,22 @@
                 </div>
                 <div class="form-group">
                   <label>Tags</label>
-                  <textarea name="tags" class="form-control" placeholder="Masukkan Tags (Pisahkan dengan koma)"></textarea>
+                  <textarea name="tags" class="form-control" placeholder="Masukkan Tags (Pisahkan dengan koma)"><%= post.tags %>
+                  </textarea>
                 </div>
                 <div class="form-group">
                   <label>Status</label>
                   <select name="status" class="form-control" required>
-                    <option value="UNPUBLISHED">Draft</option>
-                    <option value="PUBLISHED">Dipublikasi</option>
+                    <option value="UNPUBLISHED" <% if (post.status === 'UNPUBLISHED') { %> selected <% } %>>Draft</option>
+                    <option value="PUBLISHED" <% if (post.status === 'PUBLISHED') { %> selected <% } %>>Dipublikasi</option>
                   </select>
                 </div>
+                <p class="text-secondary" style="font-size: 14px">
+                  Terakhir diperbarui pada: <%= post.updatedAt %>
+                </p>
+                <p class="text-secondary" style="margin-top: -10px; font-size: 14px">
+                  Oleh: <%= post.user.fullname %>
+                </p>
               </div>
             </div>
           </div>
@@ -143,6 +147,7 @@
   }
 
   function deleteThumbnail() {
+    console.log("hehe")
     $("#thumbnail").val("")
     checkThumbnail()
   }

@@ -10,6 +10,7 @@ const dashboardUsersAddController = require("./controllers/dashboard/users/add-c
 const dashboardUsersDetailController = require("./controllers/dashboard/users/detail-controller");
 const dashboardPostsIndexController = require("./controllers/dashboard/posts/index-controller");
 const dashboardPostsAddController = require("./controllers/dashboard/posts/add-controller");
+const dashboardPostsDetailController = require("./controllers/dashboard/posts/detail-controller");
 const dashboardCategoryIndexController = require("./controllers/dashboard/categories/index-controller");
 const dashboardCategoryAddController = require("./controllers/dashboard/categories/add-controller");
 const apiSeedController = require("./controllers/api/seed-controller");
@@ -76,6 +77,18 @@ router.post(
   "/dashboard/posts/add",
   authMiddleware.required,
   dashboardPostsAddController.post
+);
+
+router.get(
+  "/dashboard/posts/:id",
+  authMiddleware.required,
+  dashboardPostsDetailController.get
+);
+
+router.put(
+  "/dashboard/posts/:id",
+  authMiddleware.required,
+  dashboardPostsDetailController.put
 );
 
 router.get(
