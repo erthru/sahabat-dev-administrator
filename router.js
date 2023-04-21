@@ -1,5 +1,6 @@
 const express = require("express");
 const authMiddleware = require("./middlewares/auth");
+const uploadMiddleware = require("./middlewares/upload");
 const indexController = require("./controllers/index-controller");
 const loginController = require("./controllers/login-controller");
 const logoutController = require("./controllers/logout-controller");
@@ -8,7 +9,9 @@ const dashboardUsersIndexController = require("./controllers/dashboard/users/ind
 const dashboardUsersAddController = require("./controllers/dashboard/users/add-controller");
 const dashboardUsersDetailController = require("./controllers/dashboard/users/detail-controller");
 const dashboardPostsIndexController = require("./controllers/dashboard/posts/index-controller");
+const dashboardPostsAddController = require("./controllers/dashboard/posts/add-controller");
 const apiSeedController = require("./controllers/api/seed-controller");
+const apiSessionOnlyController = require("./controllers/api/session-only-controller");
 
 const router = express.Router();
 
@@ -61,7 +64,20 @@ router.get(
   dashboardPostsIndexController.get
 );
 
+router.get(
+  "/dashboard/posts/add",
+  authMiddleware.required,
+  dashboardPostsAddController.get
+);
+
 // api
 router.get("/api/seeds", apiSeedController.seed);
+
+router.post(
+  "/api/session-only/upload/image",
+  authMiddleware.required,
+  uploadMiddleware.upload("image").single("file"),
+  apiSessionOnlyController.imageUpload
+);
 
 module.exports = router;

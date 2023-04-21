@@ -18,24 +18,22 @@ model User {
   updatedAt DateTime   @updatedAt
   Category  Category[]
   Post      Post[]
-  Tag       Tag[]
 }
 
 model Post {
-  id          Int        @id @default(autoincrement())
-  title       String     @unique
-  body        String
-  thumbnail   String
-  slug        String     @unique
-  status      PostStatus
-  totalView   Int
-  createdAt   DateTime   @default(now())
-  updatedAt   DateTime   @updatedAt
-  userId      Int
-  categoryId  Int
-  category    Category   @relation(fields: [categoryId], references: [id])
-  user        User       @relation(fields: [userId], references: [id])
-  usedTag     usedTag[]
+  id         Int        @id @default(autoincrement())
+  title      String     @unique
+  body       String
+  thumbnail  String
+  slug       String     @unique
+  status     PostStatus
+  totalView  Int
+  createdAt  DateTime   @default(now())
+  updatedAt  DateTime   @updatedAt
+  userId     Int
+  categoryId Int
+  category   Category   @relation(fields: [categoryId], references: [id])
+  user       User       @relation(fields: [userId], references: [id])
 }
 
 model Category {
@@ -47,26 +45,6 @@ model Category {
   userId    Int
   user      User     @relation(fields: [userId], references: [id])
   Post      Post[]
-}
-
-model Tag {
-  id        Int       @id @default(autoincrement())
-  name      String    @unique
-  createdAt DateTime  @default(now())
-  updatedAt DateTime  @updatedAt
-  userId    Int
-  user      User      @relation(fields: [userId], references: [id])
-  usedTag   usedTag[]
-}
-
-model usedTag {
-  id        Int      @id @default(autoincrement())
-  createdAt DateTime @default(now())
-  updatedAt DateTime @updatedAt
-  postId    Int
-  tagId     Int
-  post      Post     @relation(fields: [postId], references: [id])
-  tag       Tag      @relation(fields: [tagId], references: [id])
 }
 
 enum UserRole {
