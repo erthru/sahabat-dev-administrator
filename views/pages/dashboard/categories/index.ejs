@@ -7,7 +7,7 @@
             <li class="breadcrumb-item">
               <a href="/dashboard">Dashboard</a>
             </li>
-            <li class="breadcrumb-item active">Postingan</li>
+            <li class="breadcrumb-item active">Kategori</li>
           </ol>
         </div>
       </div>
@@ -20,7 +20,7 @@
           <div class="card">
             <div class="card-body">
               <a
-                href="/dashboard/posts/add"
+                href="/dashboard/categories/add"
                 class="btn btn-primary mb-3 d-table ml-auto ml-md-0 mr-auto mr-md-0 text-white"
               >
                 <i class="fas fa-plus" style="font-size: 12px"></i>
@@ -30,45 +30,22 @@
                 <thead>
                   <tr>
                     <th>No</th>
-                    <th>Judul</th>
-                    <th>Kategori</th>
-                    <th>Status</th>
-                    <th>Penulis</th>
-                    <th>Thumbnail</th>
+                    <th>Nama</th>
                     <th>Aksi</th>
                   </tr>
                 </thead>
                 <tbody>
-                  <% posts.forEach(function(post, i) { %>
+                  <% categories.forEach(function(category, i) { %>
                   <tr>
                     <td><%= i+1 %></td>
-                    <td><%= post.title %></td>
-                    <td><%= post.category.name %></td>
+                    <td><%= category.name %></td>
                     <td>
-                      <%= post.status === 'PUBLISHED' ? 'Dipublikasi' : 'Draft'
-                      %>
-                    </td>
-                    <td><%= post.user.fullname %></td>
-                    <td>
-                      <img
-                        src="<%= post.thumbnail %>"
-                        alt="thumbnail"
-                        width="80px"
-                        height="80px"
-                        style="object-fit: cover"
-                      />
-                    </td>
-                    <td>
-                      <% if (post.user.id !== sessionUser.id) { %>
-                      <button class="btn btn-warning" disabled>Lihat</button>
-                      <% } else { %>
                       <a
-                        href="/dashboard/posts/<%= post.id %>"
+                        href="/dashboard/categories/<%= category.id %>"
                         class="btn btn-warning"
                       >
                         Lihat
                       </a>
-                      <% } %>
                     </td>
                   </tr>
                   <%}) %>

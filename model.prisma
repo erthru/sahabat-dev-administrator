@@ -16,7 +16,6 @@ model User {
   email     String     @unique
   createdAt DateTime   @default(now())
   updatedAt DateTime   @updatedAt
-  Category  Category[]
   Post      Post[]
 }
 
@@ -28,6 +27,7 @@ model Post {
   slug       String     @unique
   status     PostStatus
   totalView  Int
+  tags       String
   createdAt  DateTime   @default(now())
   updatedAt  DateTime   @updatedAt
   userId     Int
@@ -42,8 +42,6 @@ model Category {
   slug      String   @unique
   createdAt DateTime @default(now())
   updatedAt DateTime @updatedAt
-  userId    Int
-  user      User     @relation(fields: [userId], references: [id])
   Post      Post[]
 }
 

@@ -1,5 +1,7 @@
 const prismaClient = require("@prisma/client");
 const bcrypt = require("bcrypt");
+const fs = require("fs");
+const path = require("path");
 
 const prisma = new prismaClient.PrismaClient();
 
@@ -16,14 +18,34 @@ async function seed(req, res) {
       return;
     }
 
+    req.session = null;
+
+    await new Promise(function (resolve, reject) {
+      fs.readdir("public/uploads", function (err, files) {
+        if (err) {
+          reject(err);
+        }
+
+        for (const file of files) {
+          if (file !== "dummy.png") {
+            fs.unlink(path.join("public/uploads", file), function (err) {
+              if (err) {
+                reject(err);
+              }
+            });
+          }
+        }
+
+        resolve();
+      });
+    });
+
     await prisma.$connect();
 
     await Promise.all([
-      prisma.user.deleteMany({}),
-      prisma.post.deleteMany({}),
       prisma.category.deleteMany({}),
-      prisma.Tag.deleteMany({}),
-      prisma.usedTag.deleteMany({}),
+      prisma.post.deleteMany({}),
+      prisma.user.deleteMany({}),
     ]);
 
     const encryptedPassword = await bcrypt.hash("123456", 10);
