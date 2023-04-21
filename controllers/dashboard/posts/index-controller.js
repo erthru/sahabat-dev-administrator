@@ -13,8 +13,6 @@ async function get(req, res) {
       },
     });
 
-    console.log(posts)
-
     res.render("pages/dashboard/posts/index", {
       layout: "layouts/layout-dashboard",
       title: `Postingan | ${process.env.APP_NAME}`,
