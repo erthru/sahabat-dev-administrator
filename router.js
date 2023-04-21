@@ -91,6 +91,12 @@ router.put(
   dashboardPostsDetailController.put
 );
 
+router.delete(
+  "/dashboard/posts/:id",
+  authMiddleware.required,
+  dashboardPostsDetailController.remove
+);
+
 router.get(
   "/dashboard/categories",
   authMiddleware.required,

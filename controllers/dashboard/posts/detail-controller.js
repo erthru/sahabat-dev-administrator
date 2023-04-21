@@ -62,7 +62,31 @@ async function put(req, res) {
   }
 }
 
+async function remove(req, res) {
+  try {
+    if (req.session.user.role !== "ADMIN") {
+      res.send("not allowed");
+      return;
+    }
+
+    const { id } = req.params;
+    await prisma.$connect();
+
+    await prisma.post.delete({
+      where: {
+        id: Number(id),
+      },
+    });
+
+    req.flash("toastSuccess", "Berhasil menghapus postingan");
+    res.redirect("/dashboard/posts");
+  } catch (err) {
+    res.send(err.message);
+  }
+}
+
 module.exports = {
   get,
   put,
+  remove,
 };
