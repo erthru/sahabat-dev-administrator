@@ -1,16 +1,37 @@
 <aside class="main-sidebar sidebar-dark-primary elevation-4">
-  <p class="text-white text-center py-3">put your logo here</p>
+  <div>
+    <a href="/dashboard" class="brand-link logo-switch">
+      <img
+        src="/images/logo-white.png"
+        alt="logo"
+        width="160px"
+        class="logo-xl"
+        style="left: 37px"
+      />
+      <img
+        src="/images/logo-small-white.png"
+        alt="logo"
+        width="32px"
+        class="logo-xs"
+        style="left: 24px"
+      />
+    </a>
+  </div>
   <div class="sidebar">
     <div class="user-panel mt-3 pb-3 mb-3 d-flex">
       <div class="image">
-        <img
-          src="/images/user-placeholder.png"
-          class="img-circle elevation-2"
-          alt="User Image"
-        />
+        <a href="/dashboard/profile">
+          <img
+            src="/images/user-placeholder.png"
+            class="img-circle elevation-2"
+            alt="User Image"
+          />
+        </a>
       </div>
       <div class="info">
-        <a href="#" class="d-block"><%= sessionUser.fullname %></a>
+        <a href="/dashboard/profile" class="d-block"
+          ><%= sessionUser.fullname %></a
+        >
       </div>
     </div>
     <nav class="mt-2">
