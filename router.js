@@ -3,6 +3,7 @@ const authMiddleware = require("./middlewares/auth");
 const uploadMiddleware = require("./middlewares/upload");
 const indexController = require("./controllers/index-controller");
 const loginController = require("./controllers/login-controller");
+const forgotPasswordController = require("./controllers/forgot-password-controller");
 const logoutController = require("./controllers/logout-controller");
 const dashboardIndexController = require("./controllers/dashboard/index-controller");
 const dashboardUsersIndexController = require("./controllers/dashboard/users/index-controller");
@@ -23,6 +24,13 @@ const router = express.Router();
 router.get("/", indexController.get);
 router.get("/login", authMiddleware.guest, loginController.get);
 router.post("/login", authMiddleware.guest, loginController.post);
+
+router.get(
+  "/forgot-password",
+  authMiddleware.guest,
+  forgotPasswordController.get
+);
+
 router.get("/logout", logoutController.get);
 
 router.get("/dashboard", authMiddleware.required, dashboardIndexController.get);
