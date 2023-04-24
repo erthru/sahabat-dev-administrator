@@ -18,6 +18,8 @@ const dashboardCategoriesDetailController = require("./controllers/dashboard/cat
 const dashboardProfileController = require("./controllers/dashboard/profile-controller");
 const apiSeedController = require("./controllers/api/seed-controller");
 const apiSessionOnlyController = require("./controllers/api/session-only-controller");
+const apiCategoryController = require("./controllers/api/category-controller");
+const apiPostController = require("./controllers/api/post-controller");
 
 const router = express.Router();
 
@@ -164,5 +166,8 @@ router.post(
   uploadMiddleware.upload("image").single("file"),
   apiSessionOnlyController.imageUpload
 );
+
+router.get("/api/posts", apiPostController.getAll);
+router.get("/api/categories", apiCategoryController.getAll);
 
 module.exports = router;
